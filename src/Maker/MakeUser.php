@@ -156,7 +156,8 @@ final class MakeUser extends AbstractMaker
 
         // C) Generate a custom user provider, if necessary
         if (!$userClassConfiguration->isEntity()) {
-            $userClassConfiguration->setUserProviderClass('App\\Security\\UserProvider');
+            $rootNamespace = rtrim($generator->getRootNamespace(), '\\');
+            $userClassConfiguration->setUserProviderClass($rootNamespace.'\\Security\\UserProvider');
             $customProviderPath = $generator->generateClass(
                 $userClassConfiguration->getUserProviderClass(),
                 'security/UserProvider.tpl.php',
